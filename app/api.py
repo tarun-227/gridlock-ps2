@@ -7,6 +7,7 @@ if xgboost/sklearn fail to initialise in the container environment.
 from __future__ import annotations
 import json
 import logging
+import os
 import sys
 from contextlib import asynccontextmanager
 from datetime import datetime
@@ -51,15 +52,24 @@ def _load_ml() -> bool:
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
-    logger.info("GridLock API starting | CWD=%s  ROOT=%s", Path.cwd(), ROOT)
+    logger.info(
+        "GridLock API starting | CWD=%s  ROOT=%s  PORT=%s",
+        Path.cwd(), ROOT, os.environ.get("PORT", "not set"),
+    )
     logger.info("Python %s", sys.version.split()[0])
-    models_dir = ROOT / "models"
-    if models_dir.exists():
-        for p in sorted(models_dir.iterdir()):
-            logger.info("  %s  (%d KB)", p.name, p.stat().st_size // 1024)
-    else:
-        logger.warning("models/ directory NOT found at %s", models_dir)
-    _load_ml()
+    try:
+        models_dir = ROOT / "models"
+        if models_dir.exists():
+            for p in sorted(models_dir.iterdir()):
+                logger.info("  model: %s  (%d KB)", p.name, p.stat().st_size // 1024)
+        else:
+            logger.warning("models/ directory NOT found at %s", models_dir)
+    except Exception as exc:
+        logger.error("Error listing models dir: %s", exc)
+    # ML is NOT loaded here — loading XGBoost/sklearn blocks the asyncio event loop
+    # for several seconds, preventing uvicorn from responding to healthchecks.
+    # _load_ml() is called lazily on the first /api/predict request instead.
+    logger.info("GridLock API ready — ML will load on first prediction request")
     yield
     logger.info("GridLock API shutting down")
 
