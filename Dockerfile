@@ -2,19 +2,29 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system deps needed by some ML libs (xgboost, lifelines, etc.)
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python deps first (cached layer)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the project
+# XGBoost 3.x ships nvidia-nccl-cu12 as a dependency on Linux.
+# The .so lives inside the Python package dir, not a standard linker path.
+# Expose it so libxgboost.so can find libnccl.so.2 if it needs it.
+ENV LD_LIBRARY_PATH="/usr/local/lib/python3.11/site-packages/nvidia/nccl/lib:${LD_LIBRARY_PATH:-}"
+
 COPY . .
 
-EXPOSE 8000
+# Fail-fast: verify the ML pipeline is importable inside this image.
+# Catches missing symbols, broken .so files, or missing model assets.
+RUN python -c "\
+import sys; sys.path.insert(0, '.'); \
+from src.predict import predict_all; \
+print('ML import OK');"
 
+EXPOSE 8000
 CMD ["sh", "-c", "uvicorn app.api:app --host 0.0.0.0 --port ${PORT:-8000}"]
