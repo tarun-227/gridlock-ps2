@@ -31,5 +31,8 @@ import sys; sys.path.insert(0, '.'); \
 from app.api import app; \
 print('API import OK');"
 
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
 EXPOSE 8000
-CMD ["sh", "-c", "uvicorn app.api:app --host 0.0.0.0 --port ${PORT:-8000} --log-level info"]
+CMD ["/app/start.sh"]
