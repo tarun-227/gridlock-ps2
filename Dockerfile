@@ -32,7 +32,7 @@ from app.api import app; \
 print('API import OK');"
 
 COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+RUN sed -i 's/\r//' /app/start.sh && chmod +x /app/start.sh
 
 EXPOSE 8000
 CMD ["/app/start.sh"]
