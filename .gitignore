@@ -1,0 +1,37 @@
+# secrets — never commit API keys
+.secrets/
+*.key
+.env
+
+# raw data (regenerate from source)
+data/raw/
+# competition dataset & submission zip (not needed for deployment)
+*.csv
+GridLock_PS2_Source.zip
+
+# parquet files (large, not needed by the deployed API)
+data/processed/*.parquet
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# node
+node_modules/
+frontend/node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+uvicorn.log
+uvicorn.err
+
+# heavy report figures (not needed for deployment)
+reports/figures/
+reports/*.pdf
+
+# NOTE: models/*.joblib, data/processed/llm*cache.json,
+# and frontend/dist/ ARE committed — Railway needs them to serve the app.

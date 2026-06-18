@@ -1,0 +1,375 @@
+{
+  "T1_closure": {
+    "pr_auc": 0.3738,
+    "roc_auc": 0.8122,
+    "f1_weighted": 0.8907,
+    "recall_pos": 0.5905,
+    "precision_pos": 0.369,
+    "threshold": 0.25641027092933655,
+    "confusion_matrix": [
+      [
+        1015,
+        106
+      ],
+      [
+        43,
+        62
+      ]
+    ],
+    "operating_points": [
+      {
+        "threshold": 0.1,
+        "recall": 0.6762,
+        "precision": 0.2851,
+        "f1_weighted": 0.8563
+      },
+      {
+        "threshold": 0.15,
+        "recall": 0.5905,
+        "precision": 0.369,
+        "f1_weighted": 0.8907
+      },
+      {
+        "threshold": 0.2,
+        "recall": 0.5905,
+        "precision": 0.369,
+        "f1_weighted": 0.8907
+      },
+      {
+        "threshold": 0.25,
+        "recall": 0.5905,
+        "precision": 0.369,
+        "f1_weighted": 0.8907
+      },
+      {
+        "threshold": 0.3,
+        "recall": 0.3524,
+        "precision": 0.5139,
+        "f1_weighted": 0.9088
+      },
+      {
+        "threshold": 0.4,
+        "recall": 0.3524,
+        "precision": 0.5139,
+        "f1_weighted": 0.9088
+      },
+      {
+        "threshold": 0.5,
+        "recall": 0.2286,
+        "precision": 0.5854,
+        "f1_weighted": 0.9037
+      }
+    ],
+    "baseline_majority_pr_auc": 0.0856,
+    "baseline_majority_f1": 0.8734,
+    "pr_auc_lift_vs_baseline": 4.3646,
+    "test_positive_rate": 0.0856,
+    "n_test": 1226
+  },
+  "T2_priority": {
+    "full": {
+      "pr_auc": 1.0,
+      "roc_auc": 1.0,
+      "f1_weighted": 0.9984,
+      "accuracy": 0.9984
+    },
+    "corridor_blind": {
+      "pr_auc": 0.9725,
+      "roc_auc": 0.9636,
+      "f1_weighted": 0.9164,
+      "accuracy": 0.9168
+    },
+    "baseline_corridor_rule": {
+      "f1_weighted": 0.9984,
+      "accuracy": 0.9984
+    }
+  },
+  "T3_duration": {
+    "n_test": 1226,
+    "n_test_uncensored": 972,
+    "c_index_aft": 0.5984,
+    "note": "raw-minute MAE is dominated by the multi-week civic tail; medae_min and log_mae are the robust metrics, and *_operational restricts to <=24h cases.",
+    "aft": {
+      "mae_min": 1147.8212,
+      "medae_min": 65.3677,
+      "rmse_min": 3671.6427,
+      "log_mae": 1.0955,
+      "mape_pct": 1013.629,
+      "r2": 0.1588,
+      "n": 972
+    },
+    "log1p_baseline": {
+      "mae_min": 1185.5098,
+      "medae_min": 65.0766,
+      "rmse_min": 4149.5809,
+      "log_mae": 1.1487,
+      "mape_pct": 228.8976,
+      "r2": -0.0744,
+      "n": 972
+    },
+    "baseline_global_median": {
+      "mae_min": 1177.6475,
+      "medae_min": 42.8788,
+      "rmse_min": 4154.6635,
+      "log_mae": 1.0719,
+      "mape_pct": 258.7438,
+      "r2": -0.077,
+      "n": 972
+    },
+    "baseline_corridor_mean": {
+      "mae_min": 1665.4418,
+      "medae_min": 676.6167,
+      "rmse_min": 3833.3663,
+      "log_mae": 2.1098,
+      "mape_pct": 1971.7707,
+      "r2": 0.0831,
+      "n": 972
+    },
+    "aft_operational": {
+      "mae_min": 291.8063,
+      "medae_min": 59.392,
+      "rmse_min": 755.1964,
+      "log_mae": 1.0249,
+      "mape_pct": 1132.6579,
+      "r2": -13.3137,
+      "n": 863
+    },
+    "log1p_operational": {
+      "mae_min": 97.6511,
+      "medae_min": 60.5332,
+      "rmse_min": 201.3562,
+      "log_mae": 0.8057,
+      "mape_pct": 245.5823,
+      "r2": -0.0176,
+      "n": 863
+    },
+    "baseline_median_operational": {
+      "mae_min": 86.5188,
+      "medae_min": 36.1103,
+      "rmse_min": 199.9489,
+      "log_mae": 0.7093,
+      "mape_pct": 279.1468,
+      "r2": -0.0034,
+      "n": 863
+    },
+    "per_cause_mae_aft": {
+      "road_conditions": 9053.9,
+      "water_logging": 4999.8,
+      "construction": 3047.8,
+      "pot_holes": 3005.9,
+      "others": 2582.6,
+      "tree_fall": 2092.0,
+      "public_event": 1551.7,
+      "vehicle_breakdown": 111.1,
+      "congestion": 53.9,
+      "accident": 28.4,
+      "procession": 28.2
+    }
+  },
+  "T3_bucket": {
+    "accuracy": 0.6584,
+    "baseline_majority_accuracy": 0.5792,
+    "majority_bucket": "1-3h",
+    "n_test": 972,
+    "per_bucket": {
+      "<1h": {
+        "n": 236,
+        "precision": 0.4074,
+        "recall": 0.1398,
+        "f1": 0.2082
+      },
+      "1-3h": {
+        "n": 563,
+        "precision": 0.7689,
+        "recall": 0.833,
+        "f1": 0.7997
+      },
+      "3-8h": {
+        "n": 27,
+        "precision": 0.5,
+        "recall": 0.037,
+        "f1": 0.069
+      },
+      ">8h": {
+        "n": 146,
+        "precision": 0.491,
+        "recall": 0.9384,
+        "f1": 0.6447
+      }
+    },
+    "confusion_matrix": [
+      [
+        33,
+        127,
+        0,
+        76
+      ],
+      [
+        47,
+        469,
+        0,
+        47
+      ],
+      [
+        0,
+        7,
+        1,
+        19
+      ],
+      [
+        1,
+        7,
+        1,
+        137
+      ]
+    ]
+  },
+  "breakdowns": {
+    "per_corridor": {
+      "Bannerghata Road": {
+        "n": 35,
+        "closure_rate": 0.0571,
+        "recall": 1.0,
+        "f1": 0.9741
+      },
+      "Bellary Road 1": {
+        "n": 83,
+        "closure_rate": 0.012,
+        "recall": 0.0,
+        "f1": 0.9636
+      },
+      "Bellary Road 2": {
+        "n": 36,
+        "closure_rate": 0.0278,
+        "recall": 0.0,
+        "f1": 0.9444
+      },
+      "Hosur Road": {
+        "n": 34,
+        "closure_rate": 0.0882,
+        "recall": 0.6667,
+        "f1": 0.9173
+      },
+      "IRR(Thanisandra road)": {
+        "n": 17,
+        "closure_rate": 0.0,
+        "recall": 0.0,
+        "f1": 0.8667
+      },
+      "Magadi Road": {
+        "n": 42,
+        "closure_rate": 0.0,
+        "recall": 0.0,
+        "f1": 0.988
+      },
+      "Mysore Road": {
+        "n": 119,
+        "closure_rate": 0.1513,
+        "recall": 0.4444,
+        "f1": 0.8384
+      },
+      "Non-corridor": {
+        "n": 480,
+        "closure_rate": 0.1333,
+        "recall": 0.625,
+        "f1": 0.8419
+      },
+      "ORR East 1": {
+        "n": 51,
+        "closure_rate": 0.0,
+        "recall": 0.0,
+        "f1": 0.98
+      },
+      "ORR East 2": {
+        "n": 28,
+        "closure_rate": 0.0357,
+        "recall": 0.0,
+        "f1": 0.9468
+      },
+      "ORR North 1": {
+        "n": 41,
+        "closure_rate": 0.0732,
+        "recall": 1.0,
+        "f1": 0.9015
+      },
+      "ORR North 2": {
+        "n": 37,
+        "closure_rate": 0.0,
+        "recall": 0.0,
+        "f1": 1.0
+      },
+      "ORR West 1": {
+        "n": 25,
+        "closure_rate": 0.04,
+        "recall": 1.0,
+        "f1": 0.912
+      },
+      "Old Madras Road": {
+        "n": 41,
+        "closure_rate": 0.0488,
+        "recall": 1.0,
+        "f1": 0.9779
+      },
+      "Tumkur Road": {
+        "n": 63,
+        "closure_rate": 0.0159,
+        "recall": 0.0,
+        "f1": 0.9519
+      },
+      "Varthur Road": {
+        "n": 15,
+        "closure_rate": 0.0667,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "West of Chord Road": {
+        "n": 37,
+        "closure_rate": 0.0541,
+        "recall": 0.5,
+        "f1": 0.8024
+      }
+    },
+    "planned_vs_unplanned": {
+      "planned": {
+        "n": 27,
+        "recall": 1.0,
+        "f1": 0.6938
+      },
+      "unplanned": {
+        "n": 1199,
+        "recall": 0.5426,
+        "f1": 0.8942
+      }
+    }
+  },
+  "shap": {
+    "t1_top_features": {
+      "cause_closure_rate": 0.3255000114440918,
+      "city_inc_1d": 0.19550000131130219,
+      "corridor_closure_rate": 0.163100004196167,
+      "corridor_days_since_last": 0.15109999477863312,
+      "grid_closure_rate": 0.12929999828338623,
+      "llm_subtype_le": 0.12489999830722809,
+      "corridor_cause_risk": 0.11209999769926071,
+      "latitude": 0.11180000007152557,
+      "llm_severity_score": 0.10509999841451645,
+      "dist_centroid_km": 0.10499999672174454
+    },
+    "t3_top_features": {
+      "cause_duration_mean": 0.9473000168800354,
+      "veh_type_le": 0.14550000429153442,
+      "corridor_inc_30d": 0.11469999700784683,
+      "longitude": 0.08219999819993973,
+      "grid_inc_30d": 0.07440000027418137,
+      "llm_estimated_duration_min": 0.06589999794960022,
+      "city_inc_1d": 0.0625,
+      "event_cause_norm_le": 0.060499999672174454,
+      "cause_closure_rate": 0.06040000170469284,
+      "llm_subtype_le": 0.057100001722574234
+    }
+  },
+  "n_features": {
+    "t1": 47,
+    "t3": 47
+  }
+}
