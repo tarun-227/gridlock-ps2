@@ -20,11 +20,16 @@ ENV LD_LIBRARY_PATH="/usr/local/lib/python3.11/site-packages/nvidia/nccl/lib:${L
 COPY . .
 
 # Fail-fast: verify the ML pipeline is importable inside this image.
-# Catches missing symbols, broken .so files, or missing model assets.
 RUN python -c "\
 import sys; sys.path.insert(0, '.'); \
 from src.predict import predict_all; \
 print('ML import OK');"
 
+# Fail-fast: verify the FastAPI app itself loads cleanly (catches module-level crashes in api.py).
+RUN python -c "\
+import sys; sys.path.insert(0, '.'); \
+from app.api import app; \
+print('API import OK');"
+
 EXPOSE 8000
-CMD ["sh", "-c", "uvicorn app.api:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uvicorn app.api:app --host 0.0.0.0 --port ${PORT:-8000} --log-level info"]
